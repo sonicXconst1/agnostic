@@ -22,5 +22,6 @@ pub trait Trader {
 }
 
 pub trait Sniffer {
-    fn get_best_orders(&self, coins: coin::CoinPair, count: u32) -> Vec<order::Order>;
+    fn all_the_best_orders(&self, coins: coin::CoinPair, count: u32) -> Vec<order::Order>;
+    fn the_best_order(&self, coins: coin::CoinPair) -> Option<order::Order>;
 }
