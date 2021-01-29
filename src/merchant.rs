@@ -6,7 +6,7 @@ pub trait Merchant
     type Trader: market::Trader;
     type Sniffer: market::Sniffer;
 
-    fn accountant(&self) -> &Self::Accountant;
-    fn trader(&self) -> &Self::Trader;
-    fn sniffer(&self) -> &Self::Sniffer;
+    fn accountant(&self) -> Self::Accountant;
+    fn trader(&self) -> Self::Trader;
+    fn sniffer(&self) -> Self::Sniffer;
 }
