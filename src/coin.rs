@@ -30,9 +30,9 @@ impl CoinPair {
         }
     }
 
-    pub fn with_delimiter(
+    pub fn with_delimiter<Converter: CoinConverter>(
         self,
-        converter: impl CoinConverter,
+        converter: &Converter,
         delimiter: char
     ) -> String {
         format!(
