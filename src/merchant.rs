@@ -1,10 +1,10 @@
-use super::balance;
+use super::market;
 
 pub trait Merchant
 {
-    type Accountant: balance::Accountant;
-    type Trader: balance::Trader;
-    type Sniffer: balance::Sniffer;
+    type Accountant: market::Accountant;
+    type Trader: market::Trader;
+    type Sniffer: market::Sniffer;
 
     fn accountant(&self) -> &Self::Accountant;
     fn trader(&self) -> &Self::Trader;

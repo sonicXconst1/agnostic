@@ -1,4 +1,4 @@
-pub mod balance;
+pub mod market;
 pub mod coin;
 pub mod currency;
 pub mod order;
