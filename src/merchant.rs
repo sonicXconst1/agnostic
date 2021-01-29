@@ -2,9 +2,9 @@ use super::market;
 
 pub trait Merchant
 {
-    type Accountant: market::Accountant;
-    type Trader: market::Trader;
-    type Sniffer: market::Sniffer;
+    type Accountant: market::Accountant + 'static;
+    type Trader: market::Trader + 'static;
+    type Sniffer: market::Sniffer + 'static;
 
     fn accountant(&self) -> Self::Accountant;
     fn trader(&self) -> Self::Trader;
