@@ -1,5 +1,5 @@
 [package]
-name = "agnostic_trading"
+name = "agnostic"
 version = "0.1.0"
 authors = ["Konstantin Senkevich <konstsen@gmail.com>"]
 edition = "2018"
@@ -8,4 +8,3 @@ edition = "2018"
 
 [dependencies]
 log = { version = "0.*" }
-futures = { version = "0.*" }
