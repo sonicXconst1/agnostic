@@ -7,6 +7,7 @@ pub enum Coin {
 
 pub trait CoinConverter {
     fn to_string(&self, coin: Coin) -> String;
+    fn to_coin<TCoin: Clone>(&self, coin: Coin) -> TCoin;
 }
 
 #[derive(Clone, Debug)]
