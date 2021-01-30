@@ -2,9 +2,11 @@ use super::currency;
 use super::order;
 use super::coin;
 
+pub type Future<Output> = std::pin::Pin<Box<dyn futures::Future<Output = Output>>>;
+
 pub trait Accountant {
-    fn ask(&self, coin: coin::Coin) -> currency::Currency;
-    fn ask_both(&self, coins: coin::CoinPair) -> (currency::Currency, currency::Currency);
+    fn ask(&self, coin: coin::Coin) -> Future<Result<currency::Currency, String>>;
+    fn ask_both(&self, coins: coin::CoinPair) -> Future<Result<(currency::Currency, currency::Currency), String>>;
     fn calculate_volume(
         &self,
         coins: coin::CoinPair,
