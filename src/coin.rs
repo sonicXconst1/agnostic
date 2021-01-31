@@ -3,6 +3,7 @@ pub enum Coin {
     TON,
     USDT,
     BTC,
+    Unknown(String),
 }
 
 pub trait CoinConverter {
