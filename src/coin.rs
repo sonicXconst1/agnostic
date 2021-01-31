@@ -10,6 +10,7 @@ pub trait CoinConverter {
 
     fn to_string(&self, coin: Coin) -> String;
     fn to_coin(&self, coin: Coin) -> Self::Coin;
+    fn from_coin(&self, coin: Self::Coin) -> Coin;
 }
 
 #[derive(Clone, Debug)]
