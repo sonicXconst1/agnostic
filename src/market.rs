@@ -28,5 +28,5 @@ pub trait Sniffer {
         count: u32,
     ) -> Future<Result<Vec<order::Order>, String>>;
     fn the_best_order(&self, coins: coin::CoinPair) -> Future<Result<order::Order, String>>;
-    fn get_my_orders(&self, coin: coin::CoinPair) -> Future<Result<Vec<order::Order>, String>>;
+    fn get_my_orders(&self, coin: coin::CoinPair) -> Future<Result<Vec<order::OrderWithId>, String>>;
 }
