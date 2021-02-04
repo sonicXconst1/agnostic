@@ -15,7 +15,7 @@ pub trait Accountant {
 
 pub trait Trader {
     fn create_order(&self, order: order::Order) -> Future<Result<(), String>>;
-    fn update_order(&self, id: &str, new_order: order::Order) -> Future<Result<(), String>>;
+    fn delte_and_create(&self, id: &str, new_order: order::Order) -> Future<Result<String, String>>;
     fn delete_order(&self, id: &str) -> Future<Result<(), String>>;
     fn create_trade_by_id(&self, order_id: &str) -> Future<Result<(), String>>;
     fn create_trade_from_order(&self, order: order::Order) -> Future<Result<(), String>>;
