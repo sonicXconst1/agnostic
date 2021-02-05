@@ -11,6 +11,7 @@ pub trait Accountant {
         coins: coin::CoinPair,
     ) -> Future<Result<(currency::Currency, currency::Currency), String>>;
     fn calculate_volume(&self, coins: coin::CoinPair, price: f64, amount: f64) -> f64;
+    fn nearest_price(&self, coins: coin::CoinPair, price: f64) -> f64;
 }
 
 pub trait Trader {
