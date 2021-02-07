@@ -6,7 +6,7 @@ pub trait Merchant
     type Trader: market::Trader + 'static;
     type Sniffer: market::Sniffer + 'static;
 
-    fn accountant(&self) -> Self::Accountant;
-    fn trader(&self) -> Self::Trader;
-    fn sniffer(&self) -> Self::Sniffer;
+    fn accountant(&self) -> std::sync::Arc<dyn market::Accountant>;
+    fn trader(&self) -> std::sync::Arc<dyn market::Trader>;
+    fn sniffer(&self) -> std::sync::Arc<dyn market::Sniffer>;
 }
