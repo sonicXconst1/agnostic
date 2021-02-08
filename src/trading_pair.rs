@@ -16,5 +16,8 @@ pub enum Side {
 }
 
 pub trait TradingPairConverter {
+    type Pair: Clone;
+
     fn to_string(&self, trading_pair: TradingPair) -> String;
+    fn to_pair(&self, trading_pair: TradingPair) -> Self::Pair;
 }
