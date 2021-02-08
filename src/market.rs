@@ -1,14 +1,16 @@
 use super::currency;
 use super::order;
 use super::trading_pair::TradingPair;
+use super::trading_pair::Coin;
 
 pub type Future<Output> = std::pin::Pin<Box<dyn futures::Future<Output = Output>>>;
 
 pub trait Accountant {
-    fn ask(&self, trading_pair: TradingPair) -> Future<Result<currency::Currency, String>>;
+    fn ask(&self, coin: Coin) -> Future<Result<currency::Currency, String>>;
     fn ask_both(
         &self,
-        trading_pair: TradingPair,
+        first_coin: Coin,
+        second_coin: Coin,
     ) -> Future<Result<(currency::Currency, currency::Currency), String>>;
     fn calculate_volume(&self, trading_pair: TradingPair, price: f64, amount: f64) -> f64;
     fn nearest_price(&self, trading_pair: TradingPair, price: f64) -> f64;
