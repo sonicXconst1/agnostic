@@ -1,5 +1,5 @@
 pub mod market;
-pub mod coin;
+pub mod trading_pair;
 pub mod currency;
 pub mod order;
 pub mod merchant;

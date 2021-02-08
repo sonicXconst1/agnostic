@@ -1,8 +1,8 @@
-use super::coin;
+use super::trading_pair::TradingPair;
 
 #[derive(Clone, Debug)]
 pub struct Order {
-    pub coins: coin::CoinPair,
+    pub trading_pair: TradingPair,
     pub price: f64,
     pub amount: f64,
 }
@@ -10,7 +10,7 @@ pub struct Order {
 #[derive(Clone, Debug)]
 pub struct OrderWithId {
     pub id: String,
-    pub coins: coin::CoinPair,
+    pub trading_pair: TradingPair,
     pub price: f64,
     pub amount: f64,
 }
