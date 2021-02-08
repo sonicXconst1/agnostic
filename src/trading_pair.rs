@@ -4,7 +4,7 @@ pub struct TradingPair {
     pub side: Side,
 }
 
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Clone, Debug)]
 pub enum Coins {
     TonUsdt,
 }
