@@ -19,6 +19,7 @@ pub enum Side {
 pub enum Coin {
     TON,
     USDT,
+    Unknown(String),
 }
 
 pub trait TradingPairConverter {
