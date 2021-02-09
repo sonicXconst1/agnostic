@@ -9,6 +9,20 @@ pub enum Coins {
     TonUsdt,
 }
 
+impl Coins {
+    pub fn base_coin(&self) -> Coin {
+        match self {
+            Coins::TonUsdt => Coin::TON,
+        }
+    }
+
+    pub fn quote_coin(&self) -> Coin {
+        match self {
+            Coins::TonUsdt => Coin::USDT,
+        }
+    }
+}
+
 impl From<Coins> for (Coin, Coin) {
     fn from(coins: Coins) -> Self {
         match coins {
