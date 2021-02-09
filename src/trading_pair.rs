@@ -4,6 +4,15 @@ pub struct TradingPair {
     pub side: Side,
 }
 
+impl TradingPair {
+    pub fn reversed(self) -> Self {
+        TradingPair {
+            coins: self.coins,
+            side: self.side.reversed(),
+        }
+    }
+}
+
 #[derive(PartialEq, Clone, Debug)]
 pub enum Coins {
     TonUsdt,
@@ -35,6 +44,15 @@ impl From<Coins> for (Coin, Coin) {
 pub enum Side {
     Sell,
     Buy
+}
+
+impl Side {
+    pub fn reversed(self) -> Side {
+        match self {
+            Side::Sell => Side::Buy,
+            Side::Buy => Side::Sell,
+        }
+    }
 }
 
 #[derive(PartialEq, Clone, Debug)]
