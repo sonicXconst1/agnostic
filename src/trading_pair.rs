@@ -9,6 +9,14 @@ pub enum Coins {
     TonUsdt,
 }
 
+impl From<Coins> for (Coin, Coin) {
+    fn from(coins: Coins) -> Self {
+        match coins {
+            Coins::TonUsdt => (Coin::TON, Coin::USDT),
+        }
+    }
+}
+
 #[derive(Clone, Debug)]
 pub enum Side {
     Sell,
