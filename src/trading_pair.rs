@@ -1,14 +1,22 @@
 #[derive(Clone, Debug)]
+pub enum Target {
+    Market,
+    Limit
+}
+
+#[derive(Clone, Debug)]
 pub struct TradingPair {
     pub coins: Coins,
     pub side: Side,
+    pub target: Target,
 }
 
 impl TradingPair {
-    pub fn reversed(self) -> Self {
+    pub fn reversed_side(self) -> Self {
         TradingPair {
             coins: self.coins,
             side: self.side.reversed(),
+            target: self.target,
         }
     }
 }
