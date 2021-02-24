@@ -14,3 +14,13 @@ pub struct OrderWithId {
     pub price: f64,
     pub amount: f64,
 }
+
+impl From<OrderWithId> for Order {
+    fn from(order: OrderWithId) -> Order {
+        Order {
+            trading_pair: order.trading_pair,
+            price: order.price,
+            amount: order.amount,
+        }
+    }
+}
