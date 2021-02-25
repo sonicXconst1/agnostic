@@ -1,8 +1,8 @@
-use super::trading_pair::Coin;
+use crate::trading_pair::Coin;
 
 #[derive(Clone, Debug)]
 pub struct Currency {
     pub coin: Coin,
-    pub amount: f64,
     pub held: f64,
+    pub amount: f64,
 }
