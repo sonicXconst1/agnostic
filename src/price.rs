@@ -44,15 +44,17 @@ pub fn convert_to_base_coin_amount(
     }
 }
 
-pub fn currency_to_base_coin_amount(
+pub fn currency_to_coin_amount(
     currency: &crate::currency::Currency,
     coins: &crate::trading_pair::Coins,
     price: &Price,
-) -> f64 {
+) -> Option<f64> {
     if currency.coin == coins.base_coin() {
-        currency.amount
+        Some(currency.amount)
+    } else if currency.coin == coins.quote_coin() {
+        Some(currency.amount * price.reversed())
     } else {
-        currency.amount * price.reversed()
+        None
     }
 }
 
@@ -124,20 +126,26 @@ mod test {
             amount: initial_amount,
         };
         let order_price = 2.0.into();
-        let calculated_amount = super::currency_to_base_coin_amount(
+        let calculated_amount = super::currency_to_coin_amount(
             &currency,
             &coins,
             &order_price);
-        assert_eq!(calculated_amount, initial_amount); 
+        assert_eq!(
+            calculated_amount.expect("Invalid coins"), 
+            initial_amount,
+            "Failed to calculate base coin amount"); 
         let currency = Currency {
             coin: coins.quote_coin(),
             held: 0.0,
             amount: initial_amount,
         };
-        let calculated_amount = super::currency_to_base_coin_amount(
+        let calculated_amount = super::currency_to_coin_amount(
             &currency,
             &coins,
             &order_price);
-        assert_eq!(calculated_amount, initial_amount * order_price.reversed())
+        assert_eq!(
+            calculated_amount.expect("Invalid coins"),
+            initial_amount * order_price.reversed(),
+            "Falied to calculated base coin amount for quote coin")
     }
 }
