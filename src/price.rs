@@ -44,6 +44,18 @@ pub fn convert_to_base_coin_amount(
     }
 }
 
+pub fn currency_to_base_coin_amount(
+    currency: &crate::currency::Currency,
+    coins: &crate::trading_pair::Coins,
+    price: &Price,
+) -> f64 {
+    if currency.coin == coins.base_coin() {
+        currency.amount
+    } else {
+        currency.amount * price.reversed()
+    }
+}
+
 #[cfg(test)]
 mod test {
     use crate::trading_pair::Target;
@@ -98,5 +110,34 @@ mod test {
         let side = Side::Sell;
         let calculated_amount = super::convert_to_base_coin_amount(target, side, &price, amount);
         assert_eq!(amount, calculated_amount);
+    }
+
+    #[test]
+    fn currency_to_base_coin_amount() {
+        use crate::trading_pair::Coins;
+        use crate::currency::Currency;
+        let coins = Coins::TonUsdt;
+        let initial_amount = 2.0;
+        let currency = Currency {
+            coin: coins.base_coin(),
+            held: 0.0,
+            amount: initial_amount,
+        };
+        let order_price = 2.0.into();
+        let calculated_amount = super::currency_to_base_coin_amount(
+            &currency,
+            &coins,
+            &order_price);
+        assert_eq!(calculated_amount, initial_amount); 
+        let currency = Currency {
+            coin: coins.quote_coin(),
+            held: 0.0,
+            amount: initial_amount,
+        };
+        let calculated_amount = super::currency_to_base_coin_amount(
+            &currency,
+            &coins,
+            &order_price);
+        assert_eq!(calculated_amount, initial_amount * order_price.reversed())
     }
 }
