@@ -19,6 +19,13 @@ impl TradingPair {
             target: self.target,
         }
     }
+
+    pub fn coin_to_spend(&self) -> Coin {
+        match self.side {
+            Side::Sell => self.coins.base_coin(),
+            Side::Buy => self.coins.quote_coin(),
+        }
+    }
 }
 
 #[derive(PartialEq, Clone, Debug)]
