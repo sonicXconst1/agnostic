@@ -64,10 +64,26 @@ impl From<Coins> for (Coin, Coin) {
     }
 }
 
+impl std::convert::TryFrom<(Coin, Coin)> for Coins {
+    type Error = CoinsError;
+
+    fn try_from(coins: (Coin, Coin)) -> Result<Coins, Self::Error> {
+        match coins {
+            (Coin::TON, Coin::USDT) => Ok(Coins::TonUsdt),
+            other => Err(CoinsError::InvalidCoins(other)),
+        }
+    }
+}
+
 impl std::fmt::Display for Coins {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}{}", self.base_coin(), self.quote_coin())
     }
+}
+
+pub enum CoinsError {
+    InvalidInputString(String),
+    InvalidCoins((Coin, Coin))
 }
 
 #[derive(Clone, Debug)]
@@ -94,6 +110,9 @@ impl std::fmt::Display for Side {
     }
 }
 
+const TON: &'static str = "ton";
+const USDT: &'static str = "usdt";
+
 #[derive(PartialEq, Clone, Debug)]
 pub enum Coin {
     TON,
@@ -103,8 +122,20 @@ pub enum Coin {
 impl std::fmt::Display for Coin {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Coin::TON => write!(f, "ton"),
-            Coin::USDT => write!(f, "usdt"),
+            Coin::TON => write!(f, "{}", TON),
+            Coin::USDT => write!(f, "{}", USDT),
+        }
+    }
+}
+
+impl std::convert::TryFrom<&str> for Coin {
+    type Error = CoinsError;
+
+    fn try_from(string: &str) -> Result<Coin, Self::Error> {
+        match string {
+            TON => Ok(Coin::TON),
+            USDT => Ok(Coin::USDT),
+            other => Err(CoinsError::InvalidInputString(other.to_owned())),
         }
     }
 }
