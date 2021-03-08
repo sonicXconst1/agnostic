@@ -4,6 +4,15 @@ pub enum Target {
     Limit
 }
 
+impl std::fmt::Display for Target {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", match self {
+            Target::Market => "market",
+            Target::Limit => "limit",
+        })
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct TradingPair {
     pub coins: Coins,
