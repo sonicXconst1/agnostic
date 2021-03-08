@@ -55,6 +55,12 @@ impl From<Coins> for (Coin, Coin) {
     }
 }
 
+impl std::fmt::Display for Coins {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}{}", self.base_coin(), self.quote_coin())
+    }
+}
+
 #[derive(Clone, Debug)]
 pub enum Side {
     Sell,
@@ -70,10 +76,28 @@ impl Side {
     }
 }
 
+impl std::fmt::Display for Side {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Side::Buy => write!(f, "buy"),
+            Side::Sell => write!(f, "sell"),
+        }
+    }
+}
+
 #[derive(PartialEq, Clone, Debug)]
 pub enum Coin {
     TON,
     USDT,
+}
+
+impl std::fmt::Display for Coin {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Coin::TON => write!(f, "ton"),
+            Coin::USDT => write!(f, "usdt"),
+        }
+    }
 }
 
 pub trait TradingPairConverter {
