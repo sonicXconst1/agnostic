@@ -2,6 +2,7 @@ use super::currency;
 use super::order;
 use super::trading_pair::TradingPair;
 use super::trading_pair::Coin;
+use crate::trade::Trade;
 
 pub type Future<Output> = std::pin::Pin<Box<dyn futures::Future<Output = Output>>>;
 
@@ -17,14 +18,13 @@ pub trait Accountant {
 }
 
 pub trait Trader {
-    fn create_order(&self, order: order::Order) -> Future<Result<(), String>>;
+    fn create_order(&self, order: order::Order) -> Future<Result<Trade, String>>;
     fn delete_and_create(
         &self,
         id: &str,
         new_order: order::Order,
-    ) -> Future<Result<String, String>>;
+    ) -> Future<Result<Trade, String>>;
     fn delete_order(&self, id: &str) -> Future<Result<(), String>>;
-    fn create_trade_from_order(&self, order: order::Order) -> Future<Result<(), String>>;
 }
 
 pub trait Sniffer {
@@ -33,7 +33,6 @@ pub trait Sniffer {
         trading_pair: TradingPair,
         count: u32,
     ) -> Future<Result<Vec<order::Order>, String>>;
-    fn the_best_order(&self, trading_pair: TradingPair) -> Future<Result<order::Order, String>>;
     fn get_my_orders(
         &self,
         trading_pair: TradingPair,
