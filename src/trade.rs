@@ -7,6 +7,22 @@ pub enum Trade {
     Limit(OrderWithId),
 }
 
+impl Trade {
+    pub fn price(&self) -> f64 {
+        match self {
+            Trade::Market(result) => result.price,
+            Trade::Limit(result) => result.price,
+        }
+    }
+
+    pub fn amount(&self) -> f64 {
+        match self {
+            Trade::Market(result) => result.amount,
+            Trade::Limit(result) => result.amount,
+        }
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct TradeResult {
     pub id: String,
