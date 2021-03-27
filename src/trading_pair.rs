@@ -37,7 +37,7 @@ impl TradingPair {
     }
 }
 
-#[derive(PartialEq, Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub enum Coins {
     TonUsdt,
 }
@@ -113,7 +113,7 @@ impl std::fmt::Display for Side {
 const TON: &'static str = "ton";
 const USDT: &'static str = "usdt";
 
-#[derive(PartialEq, Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub enum Coin {
     TON,
     USDT,
@@ -142,7 +142,7 @@ impl std::convert::TryFrom<&str> for Coin {
 
 pub trait TradingPairConverter {
     type Pair: Clone;
-    type Coin: PartialEq + Clone;
+    type Coin: Eq + Clone;
 
     fn to_string(&self, trading_pair: TradingPair) -> String;
     fn to_pair(&self, trading_pair: TradingPair) -> Self::Pair;
