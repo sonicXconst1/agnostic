@@ -2,7 +2,7 @@ use std::sync::Arc;
 use crate::merchant::Merchant;
 
 pub trait IdentityGiver {
-    type Identity: std::hash::Hash + Copy + Eq;
+    type Identity;
     type Token;
 
     fn give(&self, token: Self::Token) ->  Self::Identity;
