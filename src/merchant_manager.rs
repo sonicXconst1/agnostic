@@ -2,10 +2,10 @@ use std::sync::Arc;
 use crate::merchant::Merchant;
 
 pub trait IdentityGiver {
-    type Identity;
+    type Identity: Copy + Eq;
     type Token;
 
-    fn give(token: Self::Token) ->  Self::Identity;
+    fn give(&self, token: Self::Token) ->  Self::Identity;
 }
 
 pub trait MerchantManager {
