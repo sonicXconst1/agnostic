@@ -5,3 +5,4 @@ pub mod order;
 pub mod merchant;
 pub mod price;
 pub mod trade;
+pub mod merchant_manager;
