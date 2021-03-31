@@ -13,4 +13,6 @@ pub trait MerchantManager {
     type Giver: IdentityGiver<Identity = Self::Identity>; 
 
     fn append_merchant(&mut self, merchant: Arc<dyn Merchant>) -> Self::Identity;
+    fn remove_merchant(&mut self, merchant: Arc<dyn Merchant>) -> Self::Identity;
+    fn get(&self, identity: Self::Identity) -> Arc<dyn Merchant>;
 }
