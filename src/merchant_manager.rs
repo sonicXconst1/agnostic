@@ -12,7 +12,7 @@ pub trait MerchantManager {
     type Identity;
     type Giver: IdentityGiver<Identity = Self::Identity>; 
 
-    fn insert(&mut self, merchant: Arc<dyn Merchant>) -> Self::Identity;
+    fn insert(&mut self, merchant: Arc<dyn Merchant>) -> Option<Self::Identity>;
     fn remove(&mut self, identity: Self::Identity) -> Option<Arc<dyn Merchant>>;
-    fn get(&self, identity: Self::Identity) -> Arc<dyn Merchant>;
+    fn get(&self, identity: Self::Identity) -> Option<Arc<dyn Merchant>>;
 }
