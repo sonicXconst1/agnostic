@@ -1,7 +1,7 @@
 use crate::trading_pair::TradingPair;
 use crate::order::OrderWithId;
 
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Clone, Debug)]
 pub enum Trade {
     Market(TradeResult),
     Limit(OrderWithId),
@@ -30,7 +30,7 @@ impl Trade {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Clone, Debug)]
 pub struct TradeResult {
     pub id: String,
     pub trading_pair: TradingPair,

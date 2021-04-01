@@ -1,4 +1,4 @@
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub enum Target {
     Market,
     Limit
@@ -13,7 +13,7 @@ impl std::fmt::Display for Target {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct TradingPair {
     pub coins: Coins,
     pub side: Side,
@@ -86,7 +86,7 @@ pub enum CoinsError {
     InvalidCoins((Coin, Coin))
 }
 
-#[derive(Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub enum Side {
     Sell,
     Buy
