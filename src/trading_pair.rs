@@ -1,4 +1,4 @@
-#[derive(PartialEq, Eq, Clone, Copy, Debug)]
+#[derive(Hash, PartialEq, Eq, Clone, Copy, Debug)]
 pub enum Target {
     Market,
     Limit
@@ -86,7 +86,7 @@ pub enum CoinsError {
     InvalidCoins((Coin, Coin))
 }
 
-#[derive(PartialEq, Eq, Clone, Copy, Debug)]
+#[derive(Hash, PartialEq, Eq, Clone, Copy, Debug)]
 pub enum Side {
     Sell,
     Buy
