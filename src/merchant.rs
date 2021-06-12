@@ -2,7 +2,7 @@ use super::market;
 
 pub trait Merchant
 {
-    fn id() -> &'static str;
+    fn id(&self) -> &'static str;
 
     fn accountant(&self) -> std::sync::Arc<dyn market::Accountant>;
     fn trader(&self) -> std::sync::Arc<dyn market::Trader>;
