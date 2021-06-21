@@ -8,6 +8,13 @@ pub enum Trade {
 }
 
 impl Trade {
+    pub fn id(&self) -> String {
+        match self {
+            Trade::Market(result) => result.id.clone(),
+            Trade::Limit(result) => result.id.clone(),
+        }
+    }
+
     pub fn trading_pair(&self) -> TradingPair {
         match self {
             Trade::Market(result) => result.trading_pair.clone(),
